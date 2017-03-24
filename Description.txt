@@ -1,0 +1,13 @@
+To complie this file..
+like below!!
+
+node Comp_v2.js Filename
+
+Ex1)
+node Comp_v2.js Test.txt
+
+Ex2)
+node Comp_v2.js Test2.txt
+
+Ex3)
+node Comp_v2.js Test3.txt

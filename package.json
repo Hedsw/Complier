@@ -1,0 +1,14 @@
+{
+  "name": "as2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Comp_v2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yunhyeok Lee <yun.hyeok.lee@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "4.17.4"
+  }
+}
