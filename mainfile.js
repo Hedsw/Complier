@@ -7,8 +7,10 @@ Class : Complier CSC 446
 // To Test..  node Comp_v2.js Test.txt
 
 var modifyAs3 = require('./modifyAs3.js'); // Regular Expression
-var FS = require('./FileHandler.js');
-var as4 = require('./As4.js');
+var FS = require('./fileHandler.js');
+var as4 = require('./as4.js');
+var as5 = require('./as4and5.js');
+
 /*
 Get file name from console to check data
 */
@@ -29,13 +31,14 @@ if(modifyAs3.read(slice) == true) {
 }
 var as3 = modifyAs3.recurseParser(slice);
 
-var As4 = as4.writeTable(5);
-as4.lookUp("4");
+var HashValues = ["David", "Jennifer", "1", "Raymond",
+                 "Cynthia", "Mike", "Clayton", "1", "Jonathan", "1"];
+var as5 = as5.HashTable(HashValues);
 
 /*
 Checking ID, Reserved_words, operator, Special Value
 */
-function LexicalAnalyzer () {
+function LexicalAnalyzer() {
   /*
   Input File into this program to split each line!
   */

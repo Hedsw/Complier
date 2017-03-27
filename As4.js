@@ -52,16 +52,29 @@ var EntryPtr = function TableE(val) {
 }
 
 //This is Example to Test Every function is working correctly
+// var myDictionary = {
+//     1: 'Hello',
+//     2: 'World',
+//     3: 'Test',
+//     4: 'Hello',
+//     5: 'Test',
+//     6: 'suggestive',
+//     7: '1234',
+//     8: 'This is Test'
+// };
+
 var myDictionary = {
-    1: 'Hello',
-    2: 'World',
-    3: 'Test',
-    4: 'Hello',
-    5: 'Test',
-    6: 'suggestive',
-    7: '1234',
-    8: 'This is Test'
+    'Hello2': 1,
+    'World': 2,
+    'Test': 3,
+    'Hello': 4,
+    'Test2': 5,
+    'suggestive': 6,
+    '1234': 7,
+    'This': 8
 };
+
+
 
 module.exports = {
   //passed a lexeme and return the location for that lexeme
@@ -69,37 +82,42 @@ module.exports = {
     var storage = [],
       hashTableMethods = {
           //This is Insert Function!
-        createHashIndex: function(key) {
+        createHashIndex: function(key,value) {
+          if(key.length == 0) return storage;
           var hash = 0;
-          for(var i = 0; i< key.length; i++) {
+          // console.log(key.length + "<--");
+          for(var i = 0; i < key.length; i++) {
             hash = (hash << 5) - hash + key.charCodeAt(i);
-            hash = hash >>> 0;
+            hash = hash & hash;
           }
-          return Math.abs(hash%TableSize);
+          return Math.abs(hash % TableSize);
         },
         //insert the lexeme, token and depth into a record in the symbol table
         insert: function(key, value) {
           if(key === undefined || value === undefined || key.length === 0 || value.length === 0)
             throw ('Insertion of undefined not possible')
           else {
-            var hashIndex = this.createHashIndex(key);
+            var hashIndex = this.createHashIndex(key,value);
             storage[hashIndex] = value;
           }
           return this;
         },
         retrieve: function(key) {
                   var hashIndex = this.createHashIndex(key);
-                  return key + ': ' + storage[hashIndex];
+                  return key + ': ' + storage[hashIndex] +' : ' + hashIndex;
         }
       };
       return hashTableMethods;
   },
-  //include a procedure that will write out all variables that are in the table at a specified depth
-  writeTable: function(depth) {
-    var hashTable = this.makeHashTable();
+  initialTable: function(hashTable) {
     for(var key in myDictionary) {
       hashTable.insert(key, myDictionary[key]);
     }
+  },
+  //include a procedure that will write out all variables that are in the table at a specified depth
+  writeTable: function(depth) {
+    var hashTable = this.makeHashTable();
+    this.initialTable(hashTable);
     for (var key in myDictionary) {
     console.log(hashTable.retrieve(key));
     }
@@ -128,9 +146,7 @@ module.exports = {
   // lookup uses the lexeme to find the entry and returns a pointer to that entry
   lookUp: function(lex) {
     var hashTable = this.makeHashTable();
-    for(var key in myDictionary) {
-      hashTable.insert(key, myDictionary[key]);
-    }
+    this.initialTable(hashTable);
       console.log(hashTable.retrieve(lex) + " Test")
   }
 }
